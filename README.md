@@ -1,6 +1,6 @@
 # DGraph-CRUD
 This repo is to understand and play with DGraph. Written in C#
-
+Dgraph is recognized as one of the highest starred open source project on GitHub, showcasing its popularity within the developer community
 Dependencies :
 - FluentResults v2.15.2
 - Google protobuf v3.24
