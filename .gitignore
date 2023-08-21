@@ -1,0 +1,82 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet packages
+*.nuget.props
+*.nuget.targets
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# JetBrains Rider
+.idea/
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Rider
+.idea/
+*.sln.iml
+
+# NuGet
+*.nuget/
+
+# .NET Scaffolding
+ScaffoldingReadMe.txt
+
+# .NET Build Results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# .NET Temp
+*.nuget/
+*.dotnet/
+*.userprefs
+*.rsp
+
+# Visual Studio IntelliCode
+.vscode/
+.vscode/settings.json
+
+# Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider auto-generated files
+.idea/
+
+# Rider user-specific files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+
+
+
