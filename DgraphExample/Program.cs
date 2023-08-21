@@ -35,7 +35,7 @@ namespace DgraphExample
             };
 
             var response = await _dgraphClient.Alter(operation);
-            return !response.IsFailed;
+            return response.IsSuccess;
         }
 
         public async Task<bool> InsertData(string dataJson)
@@ -43,7 +43,7 @@ namespace DgraphExample
             var transaction = _dgraphClient.NewTransaction();
             var mutation = new MutationBuilder().SetJson(dataJson).CommitNow();
             var response = await transaction.Mutate(mutation);
-            return !response.IsFailed;
+            return response.IsSuccess;
         }
 
         public async Task<bool> QueryData(string query)
@@ -63,7 +63,7 @@ namespace DgraphExample
 
             var txn = _dgraphClient.NewTransaction();
             var response = await txn.Do(request);
-            return !response.IsFailed;
+            return response.IsSuccess;
         }
     }
 
