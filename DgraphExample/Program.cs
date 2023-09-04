@@ -45,6 +45,7 @@ namespace DgraphExample
             var response = await transaction.Mutate(mutation);
             return response.IsSuccess;
         }
+        
 
         public async Task<bool> QueryData(string query)
         {
@@ -56,6 +57,20 @@ namespace DgraphExample
         public async Task<bool> UpdateData(string query, string mutationJson)
         {
             var mutation = new MutationBuilder().SetJson(mutationJson).CommitNow();
+            var request = new RequestBuilder()
+                .WithQuery(query)
+                .WithMutations(mutation)
+                .CommitNow();
+
+            var txn = _dgraphClient.NewTransaction();
+            var response = await txn.Do(request);
+            return response.IsSuccess;
+        }
+        
+        public async Task<bool> DeleteData(string query , string mutationJson)
+        {
+           
+            var mutation = new MutationBuilder().DelNquads("uid(v) <main_key> * .").CommitNow();
             var request = new RequestBuilder()
                 .WithQuery(query)
                 .WithMutations(mutation)
@@ -85,6 +100,8 @@ namespace DgraphExample
                            "{\"main_key\":\"4\",\"second_key\":\"4\",\"value_store\":\"9\"}]";
             var dataInserted = await dgraphManager.InsertData(dataJson);
             Console.WriteLine("Data Inserted: " + dataInserted);
+            
+     
 
             var query = @"
               query get_by_main_key {
@@ -99,12 +116,20 @@ namespace DgraphExample
             Console.WriteLine("Data Queried: " + dataQueried);
 
             var updateQuery = @"
-              query {
+              query updateQuery{
                 v as var(func: le(main_key, 5))
               }";
             var updateMutationJson = "{\"value_store\": 1069,\"uid\": \"uid(v)\"}";
             var dataUpdated = await dgraphManager.UpdateData(updateQuery, updateMutationJson);
             Console.WriteLine("Data Updated: " + dataUpdated);
+            
+            var deleteQuery = @"
+              query deleteTest{
+                v as var(func: eq(main_key, 1))
+              }";
+            var deleteDataJson = "{\"value_store\":.* \n \"uid\": \"uid(v)\"}";
+            var dataDeleted = await dgraphManager.DeleteData(deleteQuery,deleteDataJson);
+            Console.WriteLine("Data deleted: " +dataDeleted);
         }
     }
 }
